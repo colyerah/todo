@@ -1,4 +1,10 @@
 import React, {useState} from 'react';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import { makeStyles } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 function App() {
   const [input, setInput] = useState("");
@@ -29,30 +35,38 @@ function App() {
 
     if (checkedOff == false && deleted == false) {
       return (
-        <div style={{border: 'solid'}}>
-          <h1>{title}</h1>
-          <h2>{dueDate}</h2>
-          <h4>{description}</h4>
-          <button style={{backgroundColor: '#1D365F', color: '#FFFFFF'}} 
-          onClick={deleteItem}>Delete</button>
-          <button style={{backgroundColor: '#1D365F', color: '#FFFFFF'}} 
-          onClick={finishItem}>Done</button>
-          <button style={{backgroundColor: '#1D365F', color: '#FFFFFF'}} 
-          onClick={unfinishItem}>Not Done</button>
+        <div style={{paddingTop: '30px'}}>
+          <Divider />
+          <Typography variant="h3" gutterBottom>{title}</Typography>
+          <Typography variant="h4" gutterBottom>{dueDate}</Typography>
+          <Typography variant="h5" gutterBottom>{description}</Typography>
+          <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+            <Button
+            onClick={deleteItem}>Delete</Button>
+            <Button
+            onClick={finishItem}>Done</Button>
+            <Button
+            onClick={unfinishItem}>Not Done</Button>
+          </ButtonGroup>
+          <Divider />
         </div>
       )
     }
 
     if (checkedOff == true && deleted == false) {
       return (
-        <div style={{border: 'solid'}}>
-          <h1 style={{textDecoration: 'line-through'}} >{title}</h1>
-          <button style={{backgroundColor: '#1D365F', color: '#FFFFFF'}} 
-          onClick={deleteItem}>Delete</button>
-          <button style={{backgroundColor: '#1D365F', color: '#FFFFFF'}} 
-          onClick={finishItem}>Done</button>
-          <button style={{backgroundColor: '#1D365F', color: '#FFFFFF'}} 
-          onClick={unfinishItem}>Not Done</button>
+        <div style={{paddingTop: '30px'}}>
+          <Divider />
+          <Typography variant="h3" gutterBottom style={{textDecoration: 'line-through'}}>{title}</Typography>
+          <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+            <Button style={{backgroundColor: '#1D365F', color: '#FFFFFF'}} 
+            onClick={deleteItem}>Delete</Button>
+            <Button style={{backgroundColor: '#1D365F', color: '#FFFFFF'}} 
+            onClick={finishItem}>Done</Button>
+            <Button style={{backgroundColor: '#1D365F', color: '#FFFFFF'}} 
+            onClick={unfinishItem}>Not Done</Button>
+          </ButtonGroup>
+          <Divider />
         </div>
       )
     }
@@ -67,15 +81,15 @@ function App() {
   };
   
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h3>What do you need to do?</h3>
-      <input type="text" onChange={(e) => setInput(e.target.value)} />
-      <h3>When is it due?</h3>
-      <input type="text" onChange={(e) => setInput2(e.target.value)} />
-      <h3>Task Notes</h3>
-      <input type="text" onChange={(e) => setInput3(e.target.value)} />
-      <button style={{backgroundColor: '#1D365F', color: '#FFFFFF'}} 
-      onClick={() => addtoList()}>Add Task</button>
+    <div style={{ textAlign: 'center'}}>
+      <Typography variant="h2" gutterBottom>
+        Todo List
+      </Typography>
+      <Input placeholder="What the task?" inputProps={{ 'aria-label': 'description' }} type="text" onChange={(e) => setInput(e.target.value)} />
+      <Input placeholder="When is it due?" inputProps={{ 'aria-label': 'description' }} type="text" onChange={(e) => setInput2(e.target.value)} />
+      <Input placeholder="Task Notes" inputProps={{ 'aria-label': 'description' }} type="text" onChange={(e) => setInput3(e.target.value)} />
+      <Button variant="contained" color="secondary" 
+      onClick={() => addtoList()}>Add Task</Button>
       {list.map((todo) => (
         <TodoItem 
         title={todo.title} 
